@@ -8,7 +8,7 @@ class BooksController < ApplicationController
     if @book.save
        flash[:notice] = "successfully"
        redirect_to book_path(@book.id)
-    else flash[:notice] ="error"
+    else
        @books = Book.all
       render:index
     end
@@ -17,6 +17,7 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
     @user = current_user
+    @book = Book.new
   end
 
 
@@ -32,7 +33,7 @@ class BooksController < ApplicationController
   def update
       @book = Book.find(params[:id])
     if @book.update(book_params)
-       flash[:notice] =""
+       flash[:notice] ="successfully"
        redirect_to book_path(@book.id)
     else flash[:notice] ="error"
       @books = Book.all
@@ -58,9 +59,9 @@ private
   end
 
    def is_matching_login_user
-      user = User.find(params[:id])
-      unless user.id == current_user.id
-      redirect_to post_images_path
+      book = Book.find(params[:id])
+      unless book.user.id == current_user.id
+      redirect_to books_path
       end
     end
 end

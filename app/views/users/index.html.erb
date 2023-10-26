@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-md-3">
       <h2>User info</h2>
       <%= image_tag @user.get_profile_image(100,100) %>
       <table class="table">
@@ -15,7 +15,9 @@
         </tr>
         </tbody>
       </table>
-      <%= link_to"編集",edit_user_path(@user.id)%>
+      <%= link_to edit_user_path(@user.id) do %>
+        <button type="button" class="btn btn-secondary btn-lg"><i class="fa-solid fa-user-cog"></i></button>
+      <% end %>
       <h2>New book</h2>
       <%= form_with model: Book.new do |f| %>
         <h5>Title</h5>
@@ -26,7 +28,7 @@
       <% end %>
     </div>
 
-    <div class="col-lg-8">
+    <div class="col-md-8 offset-md-1">
         <h2>Users</h2>
         <table class='table'>
       <thead>
